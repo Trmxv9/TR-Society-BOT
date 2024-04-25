@@ -9,8 +9,6 @@
 # testing
 /coverage
 
-# secret
-/config.json
 
 # next.js
 /.next/

@@ -25,8 +25,11 @@ module.exports = {
     });
 
     let status = "Offline";
-    if (targetUser.presence && targetUser.presence.status) {
-      switch (targetUser.presence.status) {
+    const targetUserPresence = interaction.guild.members.cache.get(
+      targetUser.id
+    )?.presence;
+    if (targetUserPresence && targetUserPresence.status) {
+      switch (targetUserPresence.status) {
         case "online":
           status = "Online";
           break;
@@ -69,6 +72,10 @@ module.exports = {
       ],
     };
 
-    await interaction.reply({ embeds: [embedMessage] });
+    const reply = await interaction.reply({ embeds: [embedMessage] });
+
+    setTimeout(() => {
+      reply.delete();
+    }, 10000);
   },
 };
